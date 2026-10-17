@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome ve Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Stil tanımları -->
+    <style>
+        /* Dropdown oku gizle */
+        .dropdown-toggle::after {
+            display: none;
+            ;
+        }
+
+        /* Sayfa boyutuna göre scroll'u gizle */
+        body {
+            overflow-y: hidden;
+        }
+
+        /* Görevlerin listelendiği kart */
+        .task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Tamamlanan görevlerin üstü çizgili olması */
+        .task label.checked {
+            text-decoration: line-through;
+        }
+
+        /* Kontrollerin yerleşimi */
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Filtrelerin stilleri */
+        .filters span.active {
+            color: #fb6c84;
+        }
+
+        .filters span {
+            margin-right: 5px;
+            font-size: 15px;
+            column-rule-color: #f8dfdb;
+            cursor: pointer;
+        }
+
+        /* Ana container stil tanımları */
+        .container {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+            background-color: #f8dfdb;
+            color: #333;
+            padding: 3rem;
+            min-height: 50rem;
+            min-width: 75.95rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Input ve buton stil tanımları */
+        .container .row .input-group {
+            min-width: 67rem;
+        }
+
+        .container .row .card {
+            background-color: transparent;
+        }
+
+        .container .row .btn {
+            background-color: #fb6c84;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Ana container -->
+    <div class="container">
+        <!-- Görev ekleme formu -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="input-group">
+                                <!-- Görev ekleme metni girişi -->
+                                <input type="text" id="txtTaskName" class="form-control" placeholder="Add Task">
+                                <!-- Görev ekleme butonu -->
+                                <button type="submit" class="btn" id="btnAddNewTask">
+                                    Add
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Görevlerin listelendiği kart -->
+                <div class="card mt-3">
+                    <div class="card-header controls">
+                        <!-- Görev filtreleri -->
+                        <div class="filters">
+                            <span class="active" id="all">All</span>
+                            <span id="pending">Pending</span>
+                            <span id="completed">Completed</span>
+                        </div>
+                        <!-- Görevlerin temizlendiği buton -->
+                        <button id="btnClear" class="btn">Clear</button>
+                    </div>
+                    <!-- Görev listesi -->
+                    <ul id="task-list" class="list-group list-group-flush">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap bağlantıları -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sıkı mod açık
+        "use strict";
+
+        // Görev listesi
+        let taskList = [];
+
+        // Eğer yerel depoda görev listesi varsa, al
+        if (localStorage.getItem("taskList") !== null) {
+            taskList = JSON.parse(localStorage.getItem("taskList"));
+        }
+
+        // Düzenleme için değişkenler
+        let editId;
+        let isEditTask = false;
+
+        // Gerekli HTML öğelerini al
+        const taskInput = document.querySelector("#txtTaskName");
+        const btnClear = document.querySelector("#btnClear");
+        const filters = document.querySelectorAll(".filters span");
+
+        // Görevleri görüntüle, varsayılan olarak tüm görevleri göster
+        displayTasks("all");
+
+        // Görevleri belirli bir filtreye göre görüntüleme fonksiyonu
+        function displayTasks(filter) {
+            let ul = document.getElementById("task-list");
+            ul.innerHTML = "";
+
+            // Görev listesi boşsa mesaj göster
+            if (taskList.length == 0) {
+                ul.innerHTML = "<p class='p-3 m-0'>Task list is empty.</p>";
+            } else {
+                // Görevleri listele
+                for (let task of taskList) {
+                    let completed = task.status == "completed" ? "checked" : "";
+                    // Filtreye uygunsa görevi listeye ekle
+                    if (filter == task.status || filter == "all") {
+                        let li = `
+                            <li class="task list-group-item">
+                                <div class="form-check">
+                                    <input type="checkbox" onclick="updateStatus(this)" id="${task.id}" class="form-check-input" ${completed}>
+                                    <label for="${task.id}" class="form-check-label ${completed}">${task.taskName}</label>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a onclick="deleteTask(${task.id})" class="dropdown-item" href="#"><i class="fa-solid fa-trash-can"></i> Sil</a></li>
+                                        <li><a onclick='editTask(${task.id}, "${task.taskName}")' class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Düzenle</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        `;
+                        ul.insertAdjacentHTML("beforeend", li);
+                    }
+                }
+            }
+        }
+
+        // Yeni görev ekleme butonu olayı
+        document.querySelector("#btnAddNewTask").addEventListener("click", newTask);
+
+        // Yeni görev ekleme butonuna Enter tuşuna basınca ekleme olayı
+        document.querySelector("#btnAddNewTask").addEventListener("keypress", function () {
+            if (event.key == "Enter") {
+                document.getElementById("btnAddNewTask").click();
+            }
+        });
+
+        // Filtrelerin tıklama olayları
+        for (let span of filters) {
+            span.addEventListener("click", function () {
+                document.querySelector("span.active").classList.remove("active");
+                span.classList.add("active");
+                displayTasks(span.id);
+            })
+        }
+
+        // Yeni görev ekleme fonksiyonu
+        function newTask(event) {
+            if (taskInput.value == "") {
+                alert("You must enter a task.");
+            } else {
+                if (!isEditTask) {
+                    // Ekleme
+                    taskList.push({ "id": taskList.length + 1, "taskName": taskInput.value, "status": "pending" });
+                } else {
+                    // Güncelleme
+                    for (let task of taskList) {
+                        if (task.id == editId) {
+                            task.taskName = taskInput.value;
+                        }
+                        isEditTask = false;
+                    }
+                }
+                taskInput.value = "";
+                displayTasks(document.querySelector("span.active").id);
+                localStorage.setItem("taskList", JSON.stringify(taskList));
+            }
+            event.preventDefault();
+        }
+
+        // Görev silme fonksiyonu
+        function deleteTask(id) {
+            let deletedId;
+            for (let index in taskList) {
+                if (taskList[index].id == id) {
+                    deletedId = index;
+                }
+            }
+            taskList.splice(deletedId, 1);
+            displayTasks(document.querySelector("span.active").id);
+            localStorage.setItem("taskList", JSON.stringify(taskList));
+        }
+
+        // Görev düzenleme fonksiyonu
+        function editTask(taskId, taskName) {
+            editId = taskId;
+            isEditTask = true;
+            taskInput.value = taskName;
+            taskInput.focus();
+            taskInput.classList.add("active");
+
+            console.log("Edit ID", editId);
+            console.log("Editting Mpde:", isEditTask);
+        }
+
+        // Temizleme butonunun tıklama olayı
+        btnClear.addEventListener("click", function () {
+            taskList.splice(0, taskList.length);
+            localStorage.setItem("taskList", JSON.stringify(taskList));
+            displayTasks();
+        })
+
+        // Görev durumu güncelleme fonksiyonu
+        function updateStatus(selectedTask) {
+            let label = selectedTask.nextElementSibling;
+            let status;
+            if (selectedTask.checked) {
+                label.classList.add("checked");
+                status = "completed";
+            } else {
+                label.classList.remove("checked");
+                status = "pending";
+            }
+            for (let task of taskList) {
+                if (task.id == selectedTask.id) {
+                    task.status = status;
+                }
+            }
+            displayTasks(document.querySelector("span.active").id);
+            localStorage.setItem("taskList", JSON.stringify(taskList));
+        }
+    </script>
+</body>
+
+</html>

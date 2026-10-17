@@ -1,0 +1,201 @@
+/* Genel stiller */
+body {
+    font-family: Arial, sans-serif;
+    /* Tüm belge boyunca kullanılacak yazı tipi */
+    background-color: #f8f9fa;
+    /* Arka plan rengi */
+    margin: 0;
+    /* Sayfa kenar boşluğu */
+    padding: 0;
+    /* Sayfa iç boşluğu */
+}
+
+/* Ana container stilleri */
+.container {
+    max-width: 800px;
+    /* Maksimum genişlik */
+    margin: 50px auto;
+    /* Kenarlardan uzaklık ve dikey hizalama */
+    padding: 20px;
+    /* İç içe geçen öğelerin dolgusu */
+    background-color: #f5f5f5;
+    /* Arka plan rengi */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Kutu gölgesi */
+    border-radius: 10px;
+    /* Köşe yuvarlama */
+    display: grid;
+    /* Izgara düzeni */
+    gap: 2rem;
+    /* Öğeler arası boşluk */
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    /* Izgara sütun düzeni */
+}
+
+/* Başlık stilleri */
+h1 {
+    text-align: center;
+    /* Metnin hizalaması */
+    color: #007bff;
+    /* Metin rengi */
+}
+
+/* Yetkilendirme düğmeleri */
+.auth-buttons {
+    text-align: center;
+    /* Metnin hizalaması */
+    margin-bottom: 20px;
+    /* Alt boşluk */
+}
+
+/* Düğme stilleri */
+button {
+    padding: 10px 20px;
+    /* Dolgu */
+    margin: 0 10px;
+    /* Kenar boşluğu */
+    border: none;
+    /* Kenar yok */
+    background-color: #007bff;
+    /* Arka plan rengi */
+    color: #fff;
+    /* Metin rengi */
+    border-radius: 5px;
+    /* Köşe yuvarlama */
+    cursor: pointer;
+    /* İşaretçi */
+}
+
+/* Düğme üzerine gelindiğinde stil */
+button:hover {
+    background-color: #0056b3;
+    /* Arka plan rengi */
+}
+
+/* Listelerin container'ı */
+.lists-container {
+    display: flex;
+    /* Düzen tipi */
+    justify-content: space-between;
+    /* Öğeler arası boşluk bırakma */
+    margin-top: 20px;
+    /* Üst boşluk */
+}
+
+/* Liste stilleri */
+.list {
+    flex: 1;
+    /* Esneklik */
+    padding: 20px;
+    /* Dolgu */
+    background-color: #fff;
+    /* Arka plan rengi */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    /* Kutu gölgesi */
+    border-radius: 10px;
+    /* Köşe yuvarlama */
+}
+
+/* Alt başlık stilleri */
+h2 {
+    margin-bottom: 10px;
+    /* Alt boşluk */
+    color: #333;
+    /* Metin rengi */
+}
+
+/* Liste öğelerinin stilleri */
+ul {
+    list-style-type: none;
+    /* Liste işareti stilini kaldır */
+    padding: 0;
+    /* Dolgu */
+}
+
+/* Metin girişi stilleri */
+input[type="text"] {
+    width: calc(100% - 20px);
+    /* Genişlik */
+    padding: 10px;
+    /* Dolgu */
+    margin-bottom: 10px;
+    /* Alt boşluk */
+    border: 1px solid #ccc;
+    /* Kenar rengi ve kalınlığı */
+    border-radius: 5px;
+    /* Köşe yuvarlama */
+}
+
+/* Ekleme düğmesi stilleri */
+button#add-todo {
+    width: calc(100% - 20px);
+    /* Genişlik */
+}
+
+/* Giriş konteynerı stil */
+#login-container {
+    text-align: center;
+    /* Metnin hizalaması */
+    margin-top: 20px;
+    /* Üst boşluk */
+}
+
+/* Giriş konteynerındaki giriş stil */
+#login-container input {
+    width: calc(100% - 20px);
+    /* Genişlik */
+    padding: 10px;
+    /* Dolgu */
+    margin-bottom: 10px;
+    /* Alt boşluk */
+    border: 1px solid #ccc;
+    /* Kenar rengi ve kalınlığı */
+    border-radius: 5px;
+    /* Köşe yuvarlama */
+}
+
+/* Giriş stil */
+#login {
+    width: calc(100% - 20px);
+    /* Genişlik */
+}
+
+/* Ekran boyutlarına göre düzenleme */
+@media screen and (max-width: 600px) {
+    .container {
+        max-width: 100%;
+        /* Maksimum genişlik */
+        margin: 10px;
+        /* Kenarlardan uzaklık */
+    }
+
+    .lists-container {
+        flex-direction: column;
+        /* Düzen tipi */
+    }
+
+    .list {
+        margin-bottom: 20px;
+        /* Alt boşluk */
+    }
+
+    input[type="text"] {
+        width: calc(100% - 20px);
+        /* Genişlik */
+    }
+
+    button#add-todo {
+        width: calc(100% - 20px);
+        /* Genişlik */
+    }
+
+    #login-container input {
+        width: calc(100% - 20px);
+        /* Genişlik */
+    }
+
+    #login {
+        width: calc(100% - 20px);
+        /* Genişlik */
+    }
+}

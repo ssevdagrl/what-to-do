@@ -1,0 +1,766 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+/* Google Font eklemek için import */
+
+:root {
+    --main-color: #fb6c84;
+    /* Ana renk değişkeni tanımla */
+    --white-color: #f8dfdb;
+    /* Beyaz renk değişkeni tanımla */
+    --border: 0.1rem solid rgba(255, 255, 255, 0.4);
+    /* Kenarlık değişkeni tanımla */
+}
+
+/* Genel stil ayarları */
+* {
+    font-family: "Poppins", sans-serif;
+    /* Yazı tipi belirle */
+    margin: 0;
+    /* Dış boşlukları sıfırla */
+    padding: 0;
+    /* Dolgu değerlerini sıfırla */
+    box-sizing: border-box;
+    /* Kutu modelini belirle */
+    outline: none;
+    /* Odak çerçevesini kaldır */
+    border: none;
+    /* Kenarlıkları kaldır */
+    text-decoration: none;
+    /* Metin alt çizgisini kaldır */
+    text-transform: capitalize;
+    /* Metin dönüşümünü baş harfi büyük yap */
+    transition: 0.2s ease;
+    /* Geçiş efektini tanımla */
+}
+
+/* Temel HTML stilleri */
+html {
+    font-size: 62.5%;
+    /* Temel yazı tipi boyutunu ayarla */
+    overflow-x: hidden;
+    /* Yatay taşmayı gizle */
+    scroll-padding-top: 9rem;
+    /* Kaydırma boşluğunu ayarla */
+    scroll-behavior: smooth;
+    /* Kaydırma davranışını düzgün yap */
+}
+
+html::-webkit-scrollbar {
+    width: 0.8rem;
+    /* Kaydırma çubuğu genişliği */
+    background-color: var(--white-color);
+    /* Arkaplan rengi */
+}
+
+html::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Kaydırma çubuğu izi arkaplan rengi */
+}
+
+html::-webkit-scrollbar-thumb {
+    border-radius: 3rem;
+    /* Kenar yarıçapı */
+    background-color: #e46474;
+    /* Arkaplan rengi */
+}
+
+body {
+    background-color: var(--main-color);
+    /* Arka plan rengini ayarla */
+}
+
+section {
+    padding: 3.5rem 7%;
+    /* Dolgu */
+}
+
+a {
+    color: black;
+    /* Renk */
+    text-decoration: none;
+    /* Metin alt çizgisini kaldır */
+}
+
+/* Düğme stilleri */
+.btn2 {
+    margin-top: 1rem;
+    /* Üst boşluk */
+    display: inline-block;
+    /* Gösterim tipi */
+    padding: 2rem 3.75rem;
+    /* Dolgu */
+    border-radius: 30rem;
+    /* Kenar yarıçapı */
+    font-size: 1.7rem;
+    /* Yazı tipi büyüklüğü */
+    color: white;
+    /* Renk */
+    background-color: transparent;
+    /* Arkaplan rengi */
+    cursor: pointer;
+    /* İmleç türü */
+}
+
+.btn {
+    margin-top: 1rem;
+    /* Üst boşluk */
+    display: inline-block;
+    /* Gösterim tipi */
+    padding: 2rem 3.75rem;
+    /* Dolgu */
+    border-radius: 30rem;
+    /* Kenar yarıçapı */
+    font-size: 1.7rem;
+    /* Yazı tipi büyüklüğü */
+    color: white;
+    /* Renk */
+    background-color: var(--main-color);
+    /* Arkaplan rengi */
+    cursor: pointer;
+    /* İmleç türü */
+}
+
+.btn:hover {
+    opacity: 0.7;
+    /* Opaklık */
+}
+
+/* Başlık stilleri */
+.heading {
+    color: white;
+    /* Renk */
+    text-transform: uppercase;
+    /* Metin dönüşümü */
+    font-size: 4rem;
+    /* Yazı tipi büyüklüğü */
+    margin-bottom: 3.5rem;
+    /* Alt boşluk */
+    border-bottom: 0.1rem solid #fff;
+    /* Alt kenarlık */
+}
+
+.heading span {
+    text-transform: uppercase;
+    /* Metin dönüşümü */
+    color: var(--white-color);
+    /* Renk */
+}
+
+/* Arama kutusu stilleri */
+.search-input {
+    font-size: 1.6rem;
+    /* Yazı tipi büyüklüğü */
+    color: var(--main-color);
+    /* Ana renk */
+    padding: 1rem;
+    /* Dolgu */
+    text-transform: none;
+    /* Metin dönüşümü */
+    border-radius: 3rem;
+    /* Kenar yarıçapı */
+}
+
+/* Başlık stilleri */
+.title {
+    font-size: 2rem;
+    /* Yazı tipi büyüklüğü */
+}
+
+/* Header stil başlangıcı */
+.header .search-form {
+    position: absolute;
+    /* Pozisyon */
+    top: 115%;
+    /* Üst kenarlık */
+    right: 7%;
+    /* Sağ kenarlık */
+    background-color: #fff;
+    /* Arkaplan rengi */
+    width: 50rem;
+    /* Genişlik */
+    height: 5rem;
+    /* Yükseklik */
+    display: flex;
+    /* Gösterim tipi */
+    align-items: center;
+    /* Dikey hizalama */
+    border-radius: 3rem;
+    /* Kenar yarıçapı */
+    box-shadow: 0px 0px 25px 2px rgb(0 0 0 / 75%);
+    /* Kutu gölgesi */
+    transform: scaleY(0);
+    /* Ölçeklendirme */
+}
+
+.header .search-form.active {
+    transform: scaleY(1);
+    /* Ölçeklendirme */
+}
+
+.header .search-form i {
+    cursor: pointer;
+    /* İmleç türü */
+    font-size: 2.2rem;
+    /* Yazı tipi büyüklüğü */
+    margin-right: 1.5rem;
+    /* Sağ boşluk */
+    color: var(--main-color);
+    /* Ana renk */
+}
+
+.header .search-form input {
+    width: 100%;
+    /* Genişlik */
+}
+
+.header .logo img {
+    height: 10rem;
+    /* Yükseklik */
+}
+
+.header {
+    background-color: white;
+    /* Arkaplan rengi */
+    display: flex;
+    /* Gösterim tipi */
+    align-items: center;
+    /* Dikey hizalama */
+    justify-content: space-between;
+    /* İçerik hizalama */
+    padding: 0 7%;
+    /* Dolgu */
+    margin: 2rem 7%;
+    /* Dış boşluk */
+    border-radius: 30rem;
+    /* Kenar yarıçapı */
+    box-shadow: 0px 0px 17px -2px rgba(0, 0, 0, 0.75);
+    /* Kutu gölgesi */
+    position: sticky;
+    /* Pozisyon */
+    top: 0;
+    /* Üst kenarlık */
+    z-index: 1000;
+    /* Z indeksi */
+}
+
+.header .navbar a {
+    margin: 0 1rem;
+    /* Boşluk */
+    font-size: 1.6rem;
+    /* Yazı tipi büyüklüğü */
+    color: black;
+    /* Renk */
+    border-bottom: 0.1rem solid transparent;
+    /* Alt kenarlık */
+}
+
+.header .navbar .active,
+.header .navbar a:hover {
+    border-color: #fb6c84;
+    /* Alt kenarlık rengi */
+    padding-bottom: 0.5rem;
+    /* Alt boşluk */
+}
+
+.header .buttons button {
+    cursor: pointer;
+    /* İmleç türü */
+    font-size: 2.5rem;
+    /* Yazı tipi büyüklüğü */
+    margin-left: 2rem;
+    /* Sol boşluk */
+    background-color: transparent;
+    /* Arkaplan rengi */
+}
+
+#menu-btn {
+    display: none;
+    /* Gösterim tipi */
+}
+
+/* Header stil sonu */
+
+/* Anasayfa stil başlangıcı */
+.home {
+    min-height: 100vh;
+    /* Minimum yükseklik */
+    background: url(../images/homeBackground.jpg) no-repeat;
+    /* Arkaplan resmi */
+    background-size: cover;
+    /* Arkaplan boyutu */
+    background-position: center;
+    /* Arkaplan konumu */
+    margin-top: -14.5rem;
+    /* Üst boşluk */
+    display: flex;
+    /* Gösterim tipi */
+    align-items: center;
+    /* Dikey hizalama */
+}
+
+#google-login,
+#register {
+    display: inline-block;
+    /* Gösterim tipi */
+    padding: 2rem 3.75rem;
+    /* Dolgu */
+    border-radius: 30rem;
+    /* Kenar yarıçapı */
+    font-size: 1.7rem;
+    /* Yazı tipi büyüklüğü */
+    color: var(--main-color);
+    /* Ana renk */
+    background-color: var(--white-color);
+    /* Arkaplan rengi */
+    cursor: pointer;
+    /* İmleç türü */
+    transition: 0.2s ease;
+    /* Geçiş efekti */
+    margin-top: 1rem;
+    /* Üst boşluk */
+    text-transform: capitalize;
+    /* Metin dönüşümü */
+}
+
+#google-login:hover,
+#register:hover {
+    opacity: 0.7;
+    /* Opaklık */
+}
+
+.home .content {
+    max-width: 60rem;
+    /* Maksimum genişlik */
+}
+
+.home .content h3 {
+    font-size: 6rem;
+    /* Yazı tipi büyüklüğü */
+    color: white;
+    /* Renk */
+}
+
+.home .content p {
+    font-size: 2rem;
+    /* Yazı tipi büyüklüğü */
+    font-weight: 300;
+    /* Yazı kalınlığı */
+    line-height: 1.8;
+    /* Satır yüksekliği */
+    padding: 1rem 0;
+    /* Dolgu */
+    color: white;
+    /* Renk */
+}
+
+.home .content p,
+.home .content h3 {
+    border-radius: 2.5rem;
+    /* Kenar yarıçapı */
+    box-shadow: 0px 0px 17px -2px rgba(0, 0, 0, 0.75);
+    /* Kutu gölgesi */
+    border-color: #f8dfdb;
+    /* Kenar rengi */
+    background-color: rgb(252, 180, 196);
+    /* Arkaplan rengi */
+}
+
+/* Listeler stil başlangıcı */
+.lists .box-container {
+    display: grid;
+    /* Gösterim tipi */
+    gap: 2rem;
+    /* Boşluk */
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    /* Sütun düzeni */
+}
+
+.lists .box-container .box {
+    background-color: #f8dfdb;
+    /* Arkaplan rengi */
+    border-radius: 3rem;
+    /* Kenar yarıçapı */
+    padding: 3rem;
+    /* Dolgu */
+    min-height: 50rem;
+    /* Minimum yükseklik */
+    display: flex;
+    /* Gösterim tipi */
+    flex-direction: column;
+    /* Düzen */
+    align-items: flex-start;
+    /* Yatay hizalama */
+    justify-content: space-between;
+    /* İçerik hizalama */
+}
+
+/* İlham stil başlangıcı */
+.inspiration .box-container {
+    display: grid;
+    /* Gösterim tipi */
+    gap: 2rem;
+    /* Boşluk */
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    /* Sütun düzeni */
+}
+
+.inspiration .box-container .box {
+    background-color: #f8dfdb;
+    /* Arkaplan rengi */
+    border-radius: 3rem;
+    /* Kenar yarıçapı */
+    padding: 3rem;
+    /* Dolgu */
+    min-height: 50rem;
+    /* Minimum yükseklik */
+    display: flex;
+    /* Gösterim tipi */
+    flex-direction: column;
+    /* Düzen */
+    align-items: flex-start;
+    /* Yatay hizalama */
+    justify-content: space-between;
+    /* İçerik hizalama */
+}
+
+.box p {
+    font-size: 3rem;
+    /* Yazı tipi büyüklüğü */
+    color: black;
+    /* Renk */
+}
+
+/* Geri bildirim stil başlangıcı */
+.feedback .box-container {
+    display: grid;
+    /* Gösterim tipi */
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    /* Sütun düzeni */
+    gap: 1.5rem;
+    /* Boşluk */
+}
+
+.feedback .box-container .box {
+    border: var(--border);
+    /* Kenarlık */
+    text-align: center;
+    /* Metin hizalama */
+    padding: 3rem 2rem;
+    /* Dolgu */
+    background-color: var(--white-color);
+    /* Arkaplan rengi */
+    border-radius: 3rem;
+    /* Kenar yarıçapı */
+}
+
+.feedback .box-container .box p {
+    font-size: 1.5rem;
+    /* Yazı tipi büyüklüğü */
+    line-height: 1.8;
+    /* Satır yüksekliği */
+    padding: 2rem 0;
+    /* Dolgu */
+}
+
+.feedback .box-container .box .user {
+    height: 7rem;
+    /* Yükseklik */
+    width: 7rem;
+    /* Genişlik */
+    border-radius: 50%;
+    /* Kenar yarıçapı */
+    object-fit: cover;
+    /* Nesne uyumu */
+}
+
+.feedback .box-container .box h3 {
+    padding: 1rem 0;
+    /* Dolgu */
+    font-size: 2rem;
+    /* Yazı tipi büyüklüğü */
+    color: var(--main-color);
+    /* Ana renk */
+}
+
+.feedback .box-container .box .stars i {
+    font-size: 1.5rem;
+    /* Yazı tipi büyüklüğü */
+    color: gold;
+    /* Renk */
+}
+
+/* İletişim stil başlangıcı */
+.contact .row {
+    display: flex;
+    /* Gösterim tipi */
+    background-color: var(--white-color);
+    /* Arkaplan rengi */
+    flex-wrap: wrap;
+    /* Öğeleri sarma */
+    gap: 1rem;
+    /* Boşluk */
+}
+
+.contact .row .map {
+    flex: 1 1 45rem;
+    /* Büyüklük */
+    width: 100%;
+    /* Genişlik */
+    object-fit: cover;
+    /* Nesne uyumu */
+}
+
+.contact .row form {
+    flex: 1 1 45rem;
+    /* Büyüklük */
+    padding: 5rem 2rem;
+    /* Dolgu */
+    text-align: center;
+    /* Metin hizalama */
+}
+
+.contact .row form h3 {
+    text-transform: uppercase;
+    /* Metin dönüşümü */
+    font-size: 3.5rem;
+    /* Yazı tipi büyüklüğü */
+    color: black;
+    /* Renk */
+}
+
+.contact .row form .inputBox {
+    display: flex;
+    /* Gösterim tipi */
+    align-items: center;
+    /* Dikey hizalama */
+    margin: 2rem 0;
+    /* Boşluk */
+    border: var(--border);
+    /* Kenarlık */
+}
+
+.contact .row form .inputBox i {
+    color: #fff;
+    /* Renk */
+    font-size: 2rem;
+    /* Yazı tipi büyüklüğü */
+    padding-left: 2rem;
+    /* Sol dolgu */
+}
+
+.contact .row form .inputBox input {
+    width: 100%;
+    /* Genişlik */
+    padding: 2rem;
+    /* Dolgu */
+    font-size: 1.7rem;
+    /* Yazı tipi büyüklüğü */
+    color: #fff;
+    /* Renk */
+    text-transform: none;
+    /* Metin dönüşümü */
+    background-color: transparent;
+    /* Arkaplan rengi */
+}
+
+.contact .row form .btn {
+    color: var(--main-color);
+    /* Ana renk */
+    background-color: #fff;
+    /* Arkaplan rengi */
+    font-weight: bold;
+    /* Yazı kalınlığı */
+}
+
+/* İletişim stil sonu */
+
+/* Footer stil başlangıcı */
+.footer {
+    background-color: var(--white-color);
+    /* Arkaplan rengi */
+    text-align: center;
+    /* Metin hizalama */
+}
+
+.footer .search {
+    display: flex;
+    /* Gösterim tipi */
+    justify-content: center;
+    /* İçerik hizalama */
+}
+
+.footer .search .search-input {
+    width: 30rem;
+    /* Genişlik */
+    background-color: #fff;
+    /* Arkaplan rengi */
+}
+
+.footer .search .btn-primary {
+    background-color: var(--main-color);
+    /* Ana renk */
+    padding: 1rem 2rem;
+    /* Dolgu */
+    margin-left: 1rem;
+    /* Sol boşluk */
+}
+
+.footer .share {
+    padding: 2rem 0;
+    /* Dolgu */
+}
+
+.footer .share a {
+    width: 5rem;
+    /* Genişlik */
+    height: 5rem;
+    /* Yükseklik */
+    line-height: 5rem;
+    /* Satır yüksekliği */
+    color: var(--main-color);
+    /* Ana renk */
+    font-size: 2rem;
+    /* Yazı tipi büyüklüğü */
+    border: var(--border);
+    /* Kenarlık */
+    border-color: var(--main-color);
+    /* Kenar rengi */
+    border-radius: 50%;
+    /* Kenar yarıçapı */
+    margin: 0.3rem;
+    /* Boşluk */
+}
+
+.footer .share a:hover {
+    background-color: #fff;
+    /* Arkaplan rengi */
+}
+
+.footer .links {
+    display: flex;
+    /* Gösterim tipi */
+    justify-content: center;
+    /* İçerik hizalama */
+    flex-wrap: wrap;
+    /* Öğeleri sarma */
+    gap: 1rem;
+    /* Boşluk */
+}
+
+.footer .links a {
+    background-color: var(--main-color);
+    /* Ana renk */
+    padding: 0.7rem 2rem;
+    /* Dolgu */
+    color: #fff;
+    /* Renk */
+    font-size: 2rem;
+    /* Yazı tipi büyüklüğü */
+    border: var(--border);
+    /* Kenarlık */
+    border-color: var(--main-color);
+    /* Kenar rengi */
+}
+
+.footer .links a:hover {
+    background-color: var(--white-color);
+    /* Arkaplan rengi */
+    opacity: 0.7;
+    /* Opaklık */
+}
+
+.footer .links a.active {
+    background-color: var(--white-color);
+    /* Arkaplan rengi */
+}
+
+.footer .credit {
+    font-size: 2rem;
+    /* Yazı tipi büyüklüğü */
+    color: var(--main-color);
+    /* Ana renk */
+    font-weight: 300;
+    /* Yazı kalınlığı */
+    padding-top: 1.5rem;
+    /* Üst dolgu */
+}
+
+.footer .credit span {
+    color: black;
+    /* Renk */
+}
+
+/* Footer stil sonu */
+
+/* Duyarlılık stil başlangıcı */
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+        /* Yazı tipi büyüklüğü */
+    }
+
+    .header {
+        padding: 1.5rem 2rem;
+        /* Dolgu */
+    }
+
+    .header .logo img {
+        height: 7rem;
+        /* Yükseklik */
+    }
+
+    section {
+        padding: 2rem;
+        /* Dolgu */
+    }
+}
+
+@media (max-width: 768px) {
+    .header #menu-btn {
+        display: inline-block;
+        /* Gösterim tipi */
+    }
+
+    .header .navbar {
+        position: absolute;
+        /* Pozisyon */
+        top: 95%;
+        /* Üst kenarlık */
+        background-color: #fff;
+        /* Arkaplan rengi */
+        height: calc(100vh - 9rem);
+        /* Yükseklik */
+        width: 23rem;
+        /* Genişlik */
+        box-shadow: 0px 20px 14px 0px rgb(0 0 0 / 75%);
+        /* Kutu gölgesi */
+        right: -100%;
+        /* Sağ kenarlık */
+    }
+
+    .header .navbar.active {
+        right: 3rem;
+        /* Sağ kenarlık */
+    }
+
+    .header .navbar a {
+        color: var(--main-color);
+        /* Ana renk */
+        display: block;
+        /* Gösterim tipi */
+        margin: 4rem;
+        /* Boşluk */
+        padding: 0.5rem;
+        /* Dolgu */
+        font-size: 2rem;
+        /* Yazı tipi büyüklüğü */
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 50%;
+        /* Yazı tipi büyüklüğü */
+    }
+}
+
+/* Duyarlılık stil sonu */

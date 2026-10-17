@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome kütüphanesinin CSS dosyası -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap kütüphanesinin CSS dosyası -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Sayfanın başlığı -->
+    <title>WhaTo Do?</title>
+    <!-- Özel stil dosyası -->
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+
+<body>
+    <!-- header section start-->
+    <header class="header">
+        <!-- Logo -->
+        <a href="#home" class="logo">
+            <img src="images/logo.png" alt="logo">
+        </a>
+        <!-- Menü -->
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#lists">Lists</a>
+            <a href="#calendar">Calendar</a>
+            <a href="#inspiration">Inspiration</a>
+            <a href="#feedbacks">Feedbacks</a>
+            <a href="#contact">Contact</a>
+
+        </nav>
+
+        <!-- Arama ve menü butonları -->
+        <div class="buttons">
+            <button id="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <button id="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Arama formu -->
+        <div class="search-form">
+            <input type="text" class="search-input" id="search-box" placeholder="search here">
+            <i class="fas fa-search"></i>
+        </div>
+    </header>
+    <!-- header section end-->
+
+    <!-- home section start-->
+    <section class="home" id="home">
+        <div class="content">
+            <!-- Başlık -->
+            <h3>NO DREAM IS TOO BIG, NO CHALLANGE IS TOO GREAT.</h3>
+            <!-- Google ile giriş ve kayıt ol butonları -->
+            <div class="btn2">
+                <button id="google-login">Log in with google</button>
+            </div>
+            <div class="btn2">
+                <button id="register">Sign up</button>
+            </div>
+
+            <!-- Başla butonu -->
+            <a href="#lists" class="btn">Let's Start!</a>
+        </div>
+    </section>
+    <!-- home section end-->
+
+    <!-- Lists section start-->
+    <section class="lists" id="lists">
+        <!-- Başlık -->
+        <h1 class="heading">Your <span>Lists</span></h1>
+        <!-- Kutu içeriği -->
+        <div class="box-container">
+            <div class="box" id="tasks">
+                <h2>Tasks I will do:</h2>
+                <!-- Görevlerin listelendiği iframe -->
+                <iframe src="tasks/task.html" width="99%" height="400"></iframe>
+            </div>
+        </div>
+    </section>
+    <!-- Lists section end-->
+
+    <!-- Calendar section start-->
+    <section class="calendar" id="calendar">
+        <!-- Başlık -->
+        <h1 class="heading">Your <span>Calendar</span></h1>
+        <!-- Takvimin yer aldığı container -->
+        <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
+            <!-- Takvim kartı -->
+            <div class="card">
+                <!-- Ay ve yıl bilgisi -->
+                <h3 class="card-header" id="monthAndYear"></h3>
+                <!-- Takvim tablosu -->
+                <table class="table table-bordered table-responsive-sm" id="calendar">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="calendar-body">
+
+                    </tbody>
+                </table>
+
+                <!-- Takvim kontrol butonları -->
+                <div class="form-inline">
+
+                    <button class="btn btn-outline-primary col-sm-6" id="previous"
+                        onclick="previous()">Previous</button>
+
+                    <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next</button>
+                </div>
+                <br />
+                <!-- Ay ve yıl seçme formu -->
+                <form class="form-inline">
+                    <label class="lead mr-2 ml-2" for="month">Jump To: </label>
+                    <select class="form-control col-sm-4" name="month" id="month" onchange="jump()">
+                        <option value=0>Jan</option>
+                        <option value=1>Feb</option>
+                        <option value=2>Mar</option>
+                        <option value=3>Apr</option>
+                        <option value=4>May</option>
+                        <option value=5>Jun</option>
+                        <option value=6>Jul</option>
+                        <option value=7>Aug</option>
+                        <option value=8>Sep</option>
+                        <option value=9>Oct</option>
+                        <option value=10>Nov</option>
+                        <option value=11>Dec</option>
+                    </select>
+
+
+                    <label for="year"></label><select class="form-control col-sm-4" name="year" id="year"
+                        onchange="jump()">
+                        <option value=2024>2024</option>
+                        <option value=2025>2025</option>
+                        <option value=2026>2026</option>
+                        <option value=2027>2027</option>
+                        <option value=2028>2028</option>
+                        <option value=2029>2029</option>
+                        <option value=2030>2030</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <!-- JavaScript dosyası -->
+        <script src="scripts.js"></script>
+
+        <!-- Bootstrap için İsteğe Bağlı JavaScript -->
+        <!-- Önce jQuery, sonra Popper.js, sonra Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+
+    </section>
+    <!-- Calendar section end-->
+
+    <!-- Inspiration section start-->
+    <section class="inspiration" id="inspiration">
+        <!-- Başlık -->
+        <h1 class="heading"> <span>Inspiration</span></h1>
+        <!-- Kutu içeriği -->
+        <div class="box-container">
+            <div class="box" id="texts">
+                <p>Plans are nothing. Planning is everything.</p>
+            </div>
+            <div class="box" id="texts">
+                <p>Some people, when they reach the bottom of the stairs, realize that they are leaning against the
+                    wrong wall. </p>
+                <p>-C.ALTA</p>
+            </div>
+            <div class="box" id="texts">
+                <p>One of the best ways to save time is to think and plan ahead. Five minutes of thinking often saves an
+                    hour of work.</p>
+                <p>-Charles Gibbons</p>
+            </div>
+        </div>
+
+    </section>
+    <!-- Inspiration section end-->
+
+    <!-- feedback section start-->
+    <section class="feedback" id="feedbacks">
+        <!-- Başlık -->
+        <h1 class="heading"> Users <span>Feedback</span></h1>
+        <!-- Kutu içeriği -->
+        <div class="box-container">
+            <div class="box">
+                <img src="/images/alıntı.png" alt="quote" />
+                <p>Siteye bayıldım! Hayatımı düzene sokmama çok yardımcı oldu.</p>
+                <img src="images/user1.png" alt="user" class="user">
+                <h3>Dila Ebrar Doğan</h3>
+                <!-- Yıldız derecelendirmesi -->
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="box">
+                <img src="/images/alıntı.png" alt="quote" />
+                <p>Artık endişe etmeme gerek kalmıyor. Yapacaklarımı yazıyorum ve hayatım kolaylaştı.</p>
+                <img src="images/user2.png" alt="user" class="user">
+                <h3>Mehmet Ali Kadıoğlu</h3>
+                <!-- Yıldız derecelendirmesi -->
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="box">
+                <img src="/images/alıntı.png" alt="quote" />
+                <p>Daha önceden deftere yazıyordum ama her zaman elimin altında olmuyordu. Şu an hem bilgisayarımdan hem
+                    telefonumdan rahatlıkla takip edebiliyorum.</p>
+                <img src="images/user3.png" alt="user" class="user">
+                <h3>Sevda Görel</h3>
+                <!-- Yıldız derecelendirmesi -->
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- feedback section end-->
+
+    <!-- contact section start-->
+    <section class="contact" id="contact">
+        <!-- Başlık -->
+        <h1 class="heading">Contact <span>Us</span></h1>
+        <!-- İletişim formu -->
+        <div class="row">
+            <!-- Google Haritalar iframe'i -->
+            <iframe class="map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96690.8172555093!2d29.85209983837819!3d40.77108469540919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cb4f66644bfb9d%3A0x82690ee7586b7eb9!2zxLB6bWl0LCBLb2NhZWxp!5e0!3m2!1str!2str!4v1715367466973!5m2!1str!2str"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <!-- İletişim formu -->
+            <form>
+                <h3>Get In Touch</h3>
+                <div class="inputBox">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Name">
+                </div>
+                <div class="inputBox">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class="inputBox">
+                    <i class="fas fa-phone"></i>
+                    <input type="number" placeholder="Number">
+                </div>
+                <input type="submit" class="btn" value="Contact Now">
+            </form>
+        </div>
+
+    </section>
+    <!-- contact section end-->
+
+    <!-- footer section start-->
+    <section class="footer">
+        <!-- Arama kutusu -->
+        <div class="search">
+            <input type="text" class="search-input" placeholder="Search">
+            <button class="btn btn-primary">Search</button>
+        </div>
+        <!-- Sosyal medya paylaşım butonları -->
+        <div class="share">
+            <a href="https://www.facebook.com/sevda.gorel.7?locale=tr_TR" class="fab fa-facebook"></a>
+            <a href="https://twitter.com/ssevdagrl" class="fab fa-twitter"></a>
+            <a href="https://www.instagram.com/ssevdagrl/" class="fab fa-instagram"></a>
+            <a href="https://www.linkedin.com/in/sevda-görel-5202a5296/" class="fab fa-linkedin"></a>
+            <a href="https://tr.pinterest.com/ssevdagrl/_created/" class="fab fa-pinterest"></a>
+        </div>
+
+        <!-- Sayfa bağlantıları -->
+        <div class="links">
+            <a href="#home" class="active">Home</a>
+            <a href="#lists">Lists</a>
+            <a href="#calendar">Calendar</a>
+            <a href="#inspiration">Inspiration</a>
+            <a href="#feedbacks">Feedbacks</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <!-- Kredi bilgisi -->
+        <div class="credit">
+            created by <span>Sevda Görel and Berat Akbay</span> | all rights reserved
+        </div>
+    </section>
+    <!-- footer section end-->
+
+</body>
+
+</html>
