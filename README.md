@@ -6,7 +6,7 @@ Bu uygulama HTML, CSS ve JavaScript kullanılarak geliştirilmiştir. DOM manip�
 
 ## Uygulama Linki
 
-Uygulamayı canlı olarak şu adresten görüntüleyebilirsiniz: [WhatToDo](whatto-do-kou-wt.netlify.app)
+Uygulamayı canlı olarak şu adresten görüntüleyebilirsiniz: [WhatToDo](https://whatto-do-kou-wt.netlify.app/)
 
 ## Özellikler
 
